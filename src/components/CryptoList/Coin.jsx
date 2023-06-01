@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Image, StyleSheet, TouchableOpacity } from "react-native";
-import StyledText from "./StyledText";
-import theme from "../theme";
+import StyledText from "../Custom/StyledText";
+import theme from "../../theme";
 import { MaterialIcons } from "@expo/vector-icons";
 
 let coinStyle;
@@ -10,7 +10,7 @@ const Coin = ({ title, imageUrl, alert, onPress }) => {
   if (alert) {
     coinStyle = [
       {
-        borderWidth: 0.3,
+        borderWidth: 0.5,
         borderColor: theme.colors.alert,
       },
       styles.mainContainer,
@@ -42,7 +42,8 @@ const styles = StyleSheet.create({
     padding: 13,
     backgroundColor: theme.colors.item,
     borderRadius: 15,
-    marginTop: 13,
+    marginTop: 5,
+    marginBottom: 8,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
@@ -55,6 +56,7 @@ const styles = StyleSheet.create({
   imageContainer: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "center",
     height: 33,
     width: 33,
     padding: 2,

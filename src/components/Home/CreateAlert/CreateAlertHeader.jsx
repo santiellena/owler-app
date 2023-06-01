@@ -6,12 +6,14 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import StyledText from "./StyledText";
-import theme from "../theme";
+import StyledText from "../../Custom/StyledText";
+import theme from "../../../theme";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
-const AlternativeHeader = ({ title }) => {
+const CreateAlertHeader = () => {
+  const navigator = useNavigation();
   return (
     <View style={styles.mainContainer}>
       <View
@@ -21,21 +23,27 @@ const AlternativeHeader = ({ title }) => {
           justifyContent: "space-between",
         }}
       >
-        <TouchableOpacity style={styles.back}>
+        <TouchableOpacity
+          style={styles.back}
+          onPress={() => navigator.navigate("HomeScreen")}
+        >
           <MaterialIcons
             name="keyboard-arrow-left"
             size={24}
             color={theme.colors.textPrimary}
           />
         </TouchableOpacity>
-        <StyledText span={true}>{title}</StyledText>
+        <StyledText span={true}>Create Alert</StyledText>
         <View style={styles.buttonContainer}>
           <AntDesign
             name="search1"
             size={20}
             color={theme.colors.textPrimary}
           />
-          <Image style={styles.image} source={{}} />
+          <Image
+            style={styles.image}
+            source={require("../../../../assets/images/buho3.jpg")}
+          />
         </View>
       </View>
       <TextInput
@@ -44,6 +52,7 @@ const AlternativeHeader = ({ title }) => {
         style={styles.input}
         maxLength={22}
         placeholderTextColor={theme.colors.textPrimary}
+        editable={false}
       />
     </View>
   );
@@ -54,7 +63,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   input: {
-    backgroundColor: theme.colors.item,
+    backgroundColor: theme.colors.blured,
     color: theme.colors.textPrimary,
     height: 45,
     marginTop: 13,
@@ -99,4 +108,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AlternativeHeader;
+export default CreateAlertHeader;

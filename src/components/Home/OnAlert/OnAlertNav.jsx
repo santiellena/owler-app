@@ -1,17 +1,17 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import CustomButton from "./CustomButton";
-import theme from "../theme";
+import CustomButton from "../../Custom/CustomButton";
+import theme from "../../../theme";
 
-const ListNav = () => {
+const OnAlertNav = () => {
   return (
     <View style={styles.container}>
       <CustomButton
-        title="All"
-        style={styles.all}
+        title="On Alert"
+        style={styles.overview}
         color={theme.colors.mainButton}
       />
-      <CustomButton title="Following" style={styles.following} />
+      <CustomButton title="All" style={styles.list} />
     </View>
   );
 };
@@ -20,18 +20,18 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     justifyContent: "flex-start",
-    marginTop: 8,
+    marginTop: 10,
+    marginBottom: 8,
   },
-  all: {
+  overview: {
     text: {
       color: theme.colors.textPrimary,
       fontSize: theme.fontSizes.span,
-      fontWeight: theme.fontWeights.bold,
       fontFamily: theme.fonts.medium,
     },
     button: {
       backgroundColor: theme.colors.mainButton,
-      width: 100,
+      width: 120,
       height: 32,
       flexDirection: "row",
       justifyContent: "center",
@@ -40,11 +40,11 @@ const styles = StyleSheet.create({
       marginTop: 10,
     },
   },
-  following: {
+  list: {
     text: {
       color: theme.colors.shadowText,
       fontSize: theme.fontSizes.span,
-      fontWeight: theme.fontWeights.bold,
+      fontFamily: theme.fonts.medium,
     },
     button: {
       backgroundColor: theme.colors.background,
@@ -59,4 +59,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ListNav;
+export default OnAlertNav;

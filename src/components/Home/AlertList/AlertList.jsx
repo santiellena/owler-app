@@ -7,17 +7,13 @@ import {
   Text,
 } from "react-native";
 import Alert from "./Alert";
-import StyledText from "./StyledText";
-import theme from "../theme";
-
-const alertList = [
-  { description: "RSI 30", icon: "poll" },
-  { description: "RSI 70", icon: "poll" },
-  { description: "PROMPT", icon: "poll" },
-  { description: "PROMPT", icon: "poll" },
-];
+import StyledText from "../../Custom/StyledText";
+import theme from "../../../theme";
+import { useNavigation } from "@react-navigation/native";
+import alertList from "../../../alertList";
 
 const AlertList = () => {
+  const navigator = useNavigation();
   return (
     <View>
       <StyledText smTitle={true} style={{ marginTop: 20, marginBottom: 10 }}>
@@ -29,10 +25,14 @@ const AlertList = () => {
         numColumns={2}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
-          <Alert description={item.description} icon={item.icon} />
+          <Alert description={item.description} period={item.period} />
         )}
       />
-      <TouchableOpacity style={styles.create}>
+
+      <TouchableOpacity
+        style={styles.create}
+        onPress={() => navigator.navigate("CreateAlertScreen")}
+      >
         <Text style={styles.text}>Create Alert</Text>
       </TouchableOpacity>
     </View>

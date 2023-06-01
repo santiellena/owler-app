@@ -1,17 +1,17 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import CustomButton from "./CustomButton";
-import theme from "../theme";
+import CustomButton from "../Custom/CustomButton";
+import theme from "../../theme";
 
-const HomeNav = () => {
+const ListNav = () => {
   return (
     <View style={styles.container}>
       <CustomButton
-        title="Overview"
-        style={styles.overview}
+        title="Following"
+        style={styles.following}
         color={theme.colors.mainButton}
       />
-      <CustomButton title="List" style={styles.list} />
+      <CustomButton title="All" style={styles.all} />
     </View>
   );
 };
@@ -20,37 +20,40 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     justifyContent: "flex-start",
-    marginTop: 10,
+    marginTop: 8,
+    marginBottom: 10,
   },
-  overview: {
+  following: {
     text: {
       color: theme.colors.textPrimary,
       fontSize: theme.fontSizes.span,
+      fontWeight: theme.fontWeights.bold,
       fontFamily: theme.fonts.medium,
     },
     button: {
       backgroundColor: theme.colors.mainButton,
-      width: 120,
+      width: 140,
       height: 32,
       flexDirection: "row",
       justifyContent: "center",
       alignItems: "center",
       borderRadius: 17,
       marginTop: 10,
+      marginRight: 10,
     },
   },
-  list: {
+  all: {
     text: {
       color: theme.colors.shadowText,
       fontSize: theme.fontSizes.span,
-      fontFamily: theme.fonts.medium,
+      fontWeight: theme.fontWeights.bold,
     },
     button: {
       backgroundColor: theme.colors.background,
       flexDirection: "row",
       justifyContent: "center",
       alignItems: "center",
-      width: 120,
+      width: 100,
       height: 32,
       borderRadius: 17,
       marginTop: 10,
@@ -58,4 +61,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeNav;
+export default ListNav;

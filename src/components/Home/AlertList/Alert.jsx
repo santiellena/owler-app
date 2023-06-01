@@ -6,18 +6,27 @@ import {
   View,
   Animated,
 } from "react-native";
-import theme from "../theme";
+import theme from "../../../theme";
+import { useNavigation } from "@react-navigation/native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-const loadAlert = () => {};
+const Alert = ({ description, period }) => {
+  const navigation = useNavigation();
 
-const Alert = ({ description, icon }) => {
   return (
-    <TouchableOpacity onPress={loadAlert} style={styles.container}>
-      <TouchableOpacity style={styles.icon}>
-        <Text style={styles.text}>IC</Text>
-      </TouchableOpacity>
+    <TouchableOpacity
+      onPress={() => navigation.navigate("OnAlertScreen")}
+      style={styles.container}
+    >
+      <View style={styles.icon}>
+        <MaterialCommunityIcons
+          name="bell-ring"
+          size={19}
+          color={theme.colors.textPrimary}
+        />
+      </View>
       <View style={styles.textContainer}>
-        <Text style={styles.label}>3 New</Text>
+        <Text style={styles.label}>{period} Period</Text>
         <Text style={styles.text}>{description}</Text>
       </View>
       <View style={styles.statusContainer}>

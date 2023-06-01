@@ -9,6 +9,9 @@ const theme = {
     label: "#C1C1C1",
     bar: "#7F7F7F",
     alert: "#07ff34",
+    inactive: "#d1d1d1",
+    blured: "#4f4f4f",
+    record: "#ed0805",
   },
   fontSizes: {
     title: 32,
