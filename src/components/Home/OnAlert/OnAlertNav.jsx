@@ -1,17 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import CustomButton from "../../Custom/CustomButton";
 import theme from "../../../theme";
 
-const OnAlertNav = () => {
+const OnAlertNav = ({ setActive, active }) => {
   return (
     <View style={styles.container}>
       <CustomButton
         title="On Alert"
-        style={styles.overview}
+        style={active ? styles.overview : styles.list}
         color={theme.colors.mainButton}
+        onPress={() => setActive(true)}
       />
-      <CustomButton title="All" style={styles.list} />
+      <CustomButton
+        title="All"
+        style={!active ? styles.overview : styles.list}
+        onPress={() => setActive(false)}
+      />
     </View>
   );
 };

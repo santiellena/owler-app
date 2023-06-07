@@ -10,9 +10,10 @@ import Alert from "./Alert";
 import StyledText from "../../Custom/StyledText";
 import theme from "../../../theme";
 import { useNavigation } from "@react-navigation/native";
-import alertList from "../../../alertList";
+import useAlertList from "../../../hooks/useAlertList";
 
 const AlertList = () => {
+  const { alertList } = useAlertList();
   const navigator = useNavigation();
   return (
     <View>
@@ -25,7 +26,12 @@ const AlertList = () => {
         numColumns={2}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
-          <Alert description={item.description} period={item.period} />
+          <Alert
+            description={item.description}
+            period={item.period}
+            active={item.active}
+            id={item.id}
+          />
         )}
       />
 

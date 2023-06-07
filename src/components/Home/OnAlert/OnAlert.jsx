@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, FlatList } from "react-native";
 import Header from "./OnAlertHeader";
 import Navigator from "./OnAlertNav";
-import data from "../../../store";
 import Coin from "../../CryptoList/Coin";
 import { useNavigation } from "@react-navigation/native";
+import useCryptoListOnAlert from "../../../hooks/useCryptoListOnAlert";
 
 const loadCryptoInfo = (
   navigation,
@@ -33,8 +33,13 @@ const loadCryptoInfo = (
   });
 };
 
-const OnAlert = () => {
+const OnAlert = ({ route }) => {
+  const { description, id } = route.params;
+  const { cryptoListOnAlert, cryptoListOnActiveAlert } =
+    useCryptoListOnAlert(id);
   const navigation = useNavigation();
+  const [active, setActive] = useState(true);
+
   return (
     <View
       style={{
@@ -44,10 +49,10 @@ const OnAlert = () => {
         flexGrow: 1,
       }}
     >
-      <Header title={"RSI 30"} />
-      <Navigator />
+      <Header title={description} />
+      <Navigator setActive={setActive} active={active} />
       <FlatList
-        data={data}
+        data={active ? cryptoListOnActiveAlert : cryptoListOnAlert}
         renderItem={({ item }) => (
           <Coin
             title={item.name}
@@ -66,7 +71,7 @@ const OnAlert = () => {
               })
             }
             imageUrl={item.image}
-            alert={true}
+            alert={item.active}
             id={item.id}
           />
         )}

@@ -9,21 +9,45 @@ import {
 import theme from "../../../theme";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import StyledText from "../../Custom/StyledText";
 
-const Alert = ({ description, period }) => {
+const Alert = ({ description, period, active, id }) => {
   const navigation = useNavigation();
-
+  let containerStyle = [];
+  if (!active) {
+    containerStyle.push(styles.container);
+    containerStyle.push(styles.disabled);
+  } else containerStyle.push(styles.container);
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate("OnAlertScreen")}
-      style={styles.container}
+      onPress={() =>
+        navigation.navigate("OnAlertScreen", {
+          description,
+          id,
+        })
+      }
+      style={containerStyle}
+      disabled={!active}
     >
-      <View style={styles.icon}>
-        <MaterialCommunityIcons
-          name="bell-ring"
-          size={19}
-          color={theme.colors.textPrimary}
-        />
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <View style={styles.icon}>
+          <MaterialCommunityIcons
+            name="bell-ring"
+            size={19}
+            color={theme.colors.textPrimary}
+          />
+        </View>
+        {!active && (
+          <StyledText small={true} danger={true}>
+            Disabled
+          </StyledText>
+        )}
       </View>
       <View style={styles.textContainer}>
         <Text style={styles.label}>{period} Period</Text>
@@ -51,6 +75,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
+  },
+  disabled: {
+    backgroundColor: theme.colors.blured,
   },
   progressBar: {
     height: 5,

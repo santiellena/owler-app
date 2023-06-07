@@ -1,5 +1,6 @@
 import { Pressable, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 import theme from "../../../theme";
 
 function Checkbox({ onChange, checked }) {

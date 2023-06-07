@@ -12,6 +12,7 @@ const theme = {
     inactive: "#d1d1d1",
     blured: "#4f4f4f",
     record: "#ed0805",
+    textDanger: "#f6343f",
   },
   fontSizes: {
     title: 32,

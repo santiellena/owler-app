@@ -1,0 +1,56 @@
+{
+  "initialData": [
+    {
+      "id": 0,
+      "description": "RSI Min. 30",
+      "period": 14,
+      "cryptoList": [
+        ["bitcoin", "BTC", true],
+        ["ethereum", "ETH", true],
+        ["litecoin", "LTC", true],
+        ["monero", "XMR", true],
+        ["ripple", "XRP", true]
+      ],
+      "active": true
+    },
+    {
+      "id": 1,
+      "description": "RSI Max. 70",
+      "period": 14,
+      "cryptoList": [
+        ["bitcoin", "BTC", true],
+        ["ethereum", "ETH", true],
+        ["litecoin", "LTC", true],
+        ["monero", "XMR", true],
+        ["ripple", "XRP", true]
+      ],
+      "active": false
+    },
+    {
+      "id": 2,
+      "description": "RSI Min. 30",
+      "period": 21,
+      "cryptoList": [
+        ["bitcoin", "BTC", true],
+        ["ethereum", "ETH", true],
+        ["litecoin", "LTC", true],
+        ["monero", "XMR", true],
+        ["ripple", "XRP", true]
+      ],
+      "active": false
+    },
+    {
+      "id": 3,
+      "description": "RSI Max. 70",
+      "period": 21,
+      "cryptoList": [
+        ["bitcoin", "BTC", true],
+        ["ethereum", "ETH", true],
+        ["litecoin", "LTC", true],
+        ["monero", "XMR", true],
+        ["ripple", "XRP", true]
+      ],
+      "active": false
+    }
+  ]
+}

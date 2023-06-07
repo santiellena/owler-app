@@ -27,6 +27,9 @@ const styles = StyleSheet.create({
   shadowText: {
     color: theme.colors.shadowText,
   },
+  danger: {
+    color: theme.colors.textDanger,
+  },
 });
 
 export default function StyledText({
@@ -38,6 +41,7 @@ export default function StyledText({
   smTitle,
   shadowText,
   style,
+  danger,
 }) {
   const textStyles = [
     styles.text,
@@ -47,6 +51,7 @@ export default function StyledText({
     span && styles.span,
     smTitle && styles.smTitle,
     shadowText && styles.shadowText,
+    danger && styles.danger,
     style,
   ];
   return <Text style={textStyles}>{children}</Text>;

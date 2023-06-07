@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { FontAwesome } from "@expo/vector-icons";
@@ -72,6 +72,7 @@ function HomeStack() {
 const Tab = createBottomTabNavigator();
 
 function MyTabs() {
+  const [icon, setIcon] = useState(false);
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -112,11 +113,20 @@ function MyTabs() {
         options={{
           tabBarIcon: ({ color, size }) => (
             <View style={styles.record}>
-              <FontAwesome5
-                name="record-vinyl"
-                size={38}
-                color={theme.colors.record}
-              />
+              {!icon && (
+                <FontAwesome5
+                  name="record-vinyl"
+                  size={38}
+                  color={theme.colors.record}
+                />
+              )}
+              {icon && (
+                <FontAwesome
+                  name="stop"
+                  size={38}
+                  color={theme.colors.record}
+                />
+              )}
             </View>
           ),
           title: "",
@@ -126,7 +136,8 @@ function MyTabs() {
           tabPress: (e) => {
             // Prevent default action
             e.preventDefault();
-            Notifications.handleNotification();
+            Notifications.watch();
+            setIcon(!icon);
           },
         })}
       />

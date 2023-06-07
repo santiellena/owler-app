@@ -2,18 +2,20 @@ import React from "react";
 import { View, FlatList } from "react-native";
 import AlternativeHeader from "./AlternativeHeader";
 import ListNav from "./ListNav";
-import data from "../../store";
+import useCryptoList from "../../hooks/useCryptoList";
 import Coin from "./Coin";
 import { useNavigation } from "@react-navigation/native";
 
-const loadCryptoAlerts = (navigation, { image, name }) => {
+const loadCryptoAlerts = (navigation, { image, name, id }) => {
   navigation.navigate("CryptoScreen", {
     image,
     name,
+    id,
   });
 };
 
 const CryptoList = () => {
+  const { cryptoList } = useCryptoList();
   const navigation = useNavigation();
   return (
     <View
@@ -27,7 +29,7 @@ const CryptoList = () => {
       <AlternativeHeader title={"Crypto List"} />
       <ListNav />
       <FlatList
-        data={data}
+        data={cryptoList}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
           <Coin
@@ -37,6 +39,7 @@ const CryptoList = () => {
               loadCryptoAlerts(navigation, {
                 name: item.name,
                 image: item.image,
+                id: item.id,
               })
             }
           />

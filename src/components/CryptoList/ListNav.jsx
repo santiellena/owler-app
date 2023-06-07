@@ -11,7 +11,7 @@ const ListNav = () => {
         style={styles.following}
         color={theme.colors.mainButton}
       />
-      <CustomButton title="All" style={styles.all} />
+      {/* <CustomButton title="All" style={styles.all} /> */}
     </View>
   );
 };

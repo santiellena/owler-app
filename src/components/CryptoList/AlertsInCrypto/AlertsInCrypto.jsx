@@ -4,9 +4,10 @@ import CryptoHeader from "./CryptoHeader";
 import CryptoNav from "./CryptoNav";
 import AlertSelector from "./AlertSelector";
 import theme from "../../../theme";
-import alertList from "../../../alertList";
+import useAlertList from "../../../hooks/useAlertList";
 
 const Crypto = ({ route }) => {
+  const { alertList } = useAlertList();
   return (
     <View style={{ paddingVertical: 20, paddingHorizontal: 30 }}>
       <CryptoHeader image={route.params.image} name={route.params.name} />
@@ -17,7 +18,13 @@ const Crypto = ({ route }) => {
         numColumns={1}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
-          <AlertSelector description={item.description} period={item.period} />
+          <AlertSelector
+            description={item.description}
+            period={item.period}
+            active={item.active}
+            selected={item.cryptoList.find((e) => e[0] == route.params.id)[3]}
+            idCrypto={route.params.id}
+          />
         )}
       />
     </View>
