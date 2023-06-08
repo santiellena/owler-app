@@ -1,31 +1,33 @@
 import * as BackgroundFetch from "expo-background-fetch";
 import * as TaskManager from "expo-task-manager";
+import notify from "./rsi/notify";
 
-const TASK_NAME = "ALL_RSI";
+const RSI30_TASK = "RSI30_TASK";
 
-TaskManager.defineTask(TASK_NAME, () => {
+TaskManager.defineTask(RSI30_TASK, async () => {
   try {
-    const receivedNewData = "My Task Fetch: " + Math.random(); // do your background fetch here
-    console.log(receivedNewData);
+    console.log("PROCESS STARTED");
+    const receivedNewData = await notify(); // do your background fetch here
     return receivedNewData
       ? BackgroundFetch.BackgroundFetchResult.NewData
       : BackgroundFetch.BackgroundFetchResult.NoData;
   } catch (error) {
+    console.log(error);
     return BackgroundFetch.BackgroundFetchResult.Failed;
   }
 });
 
 const register = () => {
-  return BackgroundFetch.registerTaskAsync(TASK_NAME, {
-    // minimumInterval: 14400, // 4 hours interval
-    minimumInterval: 1,
-    stopOnTerminate: false,
+  return BackgroundFetch.registerTaskAsync(RSI30_TASK, {
+    minimumInterval: 14400, // 4 hours interval
+    //minimumInterval: 1,
+    stopOnTerminate: true,
     startOnBoot: false,
   });
 };
 
 const unregister = () => {
-  return BackgroundFetch.unregisterTaskAsync(TASK_NAME);
+  return BackgroundFetch.unregisterTaskAsync(RSI30_TASK);
 };
 
 export default {

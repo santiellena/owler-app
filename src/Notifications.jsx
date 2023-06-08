@@ -1,7 +1,7 @@
 import * as Notification from "expo-notifications";
 import theme from "./theme";
 let watching = false;
-import MyTask from "./services/MyTask";
+import Rsi30Task from "./services/Rsi30Task";
 
 const setWatching = (newValue) => {
   watching = newValue;
@@ -21,7 +21,7 @@ const watch = () => {
         seconds: 1,
       },
     });
-    MyTask.unregister()
+    Rsi30Task.unregister()
       .then(() => console.log("Task unregistered"))
       .catch((err) => console.log(err));
     setWatching(false);
@@ -39,7 +39,7 @@ const watch = () => {
       },
     });
     setWatching(true);
-    MyTask.register()
+    Rsi30Task.register()
       .then(() => console.log("Task registered"))
       .catch((err) => console.log(err));
   }
