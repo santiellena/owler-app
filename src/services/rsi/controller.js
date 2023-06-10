@@ -22,7 +22,7 @@ const joinData = async ({ symbol1, symbol2, exchange, interval, period }) => {
     endTime,
   });
   const joinedData = [];
-  for (let i = 0; i < marketData.length; i++) {
+  for (let i = 0; i < rsiData.length; i++) {
     const item = {
       rsiValue: rsiData[i].value,
       backtrack: rsiData[i].backtrack,
@@ -61,9 +61,9 @@ const RsiUnder30 = async ({ symbol1, symbol2, exchange, interval, period }) => {
   }
 
   if (condition1 && condition2 && condition3) {
-    return { symbol1, symbol2, backtrackOfMatch };
+    return { symbol1, symbol2, backtrackOfMatch, flag: true };
   } else {
-    return false;
+    return { symbol1, symbol2, flag: false };
   }
 };
 

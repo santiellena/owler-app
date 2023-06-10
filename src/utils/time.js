@@ -101,4 +101,4 @@ const getUnixTime18Candles4hAgo = () => {
   return { recentUnixTime, unixTime18Candles4hAgo };
 };
 
-export default { getUnixTime18Candles4hAgo };
+export default { getUnixTime18Candles4hAgo, getUnixTimeOfLast4hCandle };

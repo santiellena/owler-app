@@ -17,6 +17,7 @@ import OnAlert from "./components/Home/OnAlert/OnAlert";
 import CreateAlert from "./components/Home/CreateAlert/CreateAlert";
 import Crypto from "./components/CryptoList/AlertsInCrypto/AlertsInCrypto";
 import CryptoModal from "./components/Home/OnAlert/CryptoModal";
+import AsyncStorage from "./AsyncStorage";
 
 const ListStackNavigator = createNativeStackNavigator();
 const HomeStackNavigator = createNativeStackNavigator();
@@ -73,6 +74,14 @@ const Tab = createBottomTabNavigator();
 
 function MyTabs() {
   const [icon, setIcon] = useState(false);
+  AsyncStorage.getWatchingStatus().then((e) => {
+    if (e == "0") {
+      setIcon(false);
+    } else {
+      setIcon(true);
+    }
+  });
+
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -136,8 +145,13 @@ function MyTabs() {
           tabPress: (e) => {
             // Prevent default action
             e.preventDefault();
-            Notifications.watch();
-            setIcon(!icon);
+            if (icon == false) {
+              Notifications.watch(false);
+              setIcon(true);
+            } else {
+              Notifications.watch(true);
+              setIcon(false);
+            }
           },
         })}
       />

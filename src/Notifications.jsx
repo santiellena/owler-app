@@ -1,46 +1,47 @@
 import * as Notification from "expo-notifications";
 import theme from "./theme";
-let watching = false;
 import Rsi30Task from "./services/Rsi30Task";
+import AsyncStorage from "./AsyncStorage";
 
-const setWatching = (newValue) => {
-  watching = newValue;
-};
-
-const watch = () => {
+const watch = (watching) => {
   if (watching) {
-    Notification.scheduleNotificationAsync({
-      content: {
-        title: "STOPPED",
-        body: "Watching is OFF",
-        color: theme.colors.mainButton,
-        autoDismiss: true,
-        priority: true,
-      },
-      trigger: {
-        seconds: 1,
-      },
-    });
     Rsi30Task.unregister()
-      .then(() => console.log("Task unregistered"))
+      .then(async () => {
+        console.log("Task unregistered");
+        await AsyncStorage.changeWatchingStatus(false);
+        await AsyncStorage.resetPointer();
+        Notification.scheduleNotificationAsync({
+          content: {
+            title: "STOPPED",
+            body: "Watching is OFF",
+            color: theme.colors.mainButton,
+            autoDismiss: true,
+            priority: true,
+          },
+          trigger: {
+            seconds: 1,
+          },
+        });
+      })
       .catch((err) => console.log(err));
-    setWatching(false);
   } else if (!watching) {
-    Notification.scheduleNotificationAsync({
-      content: {
-        title: "STARTED",
-        body: "Watching is ON",
-        color: theme.colors.mainButton,
-        autoDismiss: true,
-        priority: true,
-      },
-      trigger: {
-        seconds: 1,
-      },
-    });
-    setWatching(true);
     Rsi30Task.register()
-      .then(() => console.log("Task registered"))
+      .then(async () => {
+        console.log("Task registered");
+        await AsyncStorage.changeWatchingStatus(true);
+        Notification.scheduleNotificationAsync({
+          content: {
+            title: "STARTED",
+            body: "Watching is ON",
+            color: theme.colors.mainButton,
+            autoDismiss: true,
+            priority: true,
+          },
+          trigger: {
+            seconds: 1,
+          },
+        });
+      })
       .catch((err) => console.log(err));
   }
 };
