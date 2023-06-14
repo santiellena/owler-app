@@ -5,6 +5,8 @@ const INITIAL_DATA_KEY = "INITIAL_DATA_KEY";
 const WATCHING_STATUS_KEY = "WATCHING_STATUS_KEY";
 const POINTER_KEY = "POINTER_KEY";
 const HOUR_POINTER_KEY = "HOUR_POINTER_KEY";
+const API_SECRET_KEY = "API_SECRET_KEY";
+const WELCOME_KEY = "WELCOME_KEY";
 
 const storeInitialData = async () => {
   try {
@@ -49,8 +51,6 @@ const removeValue = async (key) => {
   } catch (e) {
     console.log(e);
   }
-
-  console.log("Done.");
 };
 
 const getAlertList = async () => {
@@ -135,6 +135,41 @@ const setHourPointer = async (newHourPointer) => {
   await setObjectValue(HOUR_POINTER_KEY, newHourPointer);
 };
 
+const changeCryptoAlertStatus = async (newValue, idAlert, idCrypto) => {
+  const alertList = await getAlertList();
+  const newList = alertList.map((alert) => {
+    if (alert.id == idAlert) {
+      for (let i = 0; i < alert.cryptoList.length; i++) {
+        if (idCrypto == alert.cryptoList[i][1]) {
+          alert.cryptoList[i][2] = newValue;
+        }
+      }
+    }
+    return alert;
+  });
+  await setObjectValue(INITIAL_DATA_KEY, newList);
+};
+
+const setApiSecret = async (secret) => {
+  await setObjectValue(API_SECRET_KEY, secret);
+};
+
+const getApiSecret = async () => {
+  return await getMyObject(API_SECRET_KEY);
+};
+
+const updateApiSecret = async (newSecret) => {
+  await setObjectValue(API_SECRET_KEY, newSecret);
+};
+
+const getWelcome = async () => {
+  return await getMyObject(WELCOME_KEY);
+};
+
+const setWelcome = async (newValue) => {
+  await setObjectValue(WELCOME_KEY, newValue);
+};
+
 export default {
   getInitialData,
   storeInitialData,
@@ -149,4 +184,10 @@ export default {
   resetPointer,
   getHourPointer,
   setHourPointer,
+  changeCryptoAlertStatus,
+  setApiSecret,
+  getApiSecret,
+  updateApiSecret,
+  getWelcome,
+  setWelcome,
 };

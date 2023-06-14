@@ -30,7 +30,7 @@ const notify = async () => {
   ];
 
   let pointer = await AsyncStorage.getPointer();
-  console.log("Not updated pointer: ", pointer);
+  // await AsyncStorage.setHourPointer(1); // Development line
   const hourPointer = await AsyncStorage.getHourPointer();
 
   // const response = await rsi30.AllRsiUnder30({
@@ -53,25 +53,27 @@ const notify = async () => {
     if (alert.flag) {
       const title = `RSI -30: ${alert.symbol1}/${alert.symbol2}`;
       const body = `The parameter was matched ${alert.backtrackOfMatch} candles ago`;
+      await AsyncStorage.changeStatusCryptoFromAlert(true, 0, alert.symbol1);
       sendNotification({ title, body });
-
+      await AsyncStorage.changeCryptoAlertStatus(true, 0, alert.symbol1);
       //Update active alerts on alerts list
     } else {
-      sendNotification({
-        title: `RSI -30: ${alert.symbol1}/${alert.symbol2}`,
-        body: "The parameter didn't match",
-      });
-      pointer++;
-      console.log("Updated pointer: ", pointer);
-      await AsyncStorage.setPointer(pointer++);
-      if (pointer == 5) {
-        await AsyncStorage.resetPointer();
-        await AsyncStorage.setHourPointer(
-          time.getUnixTimeOfLast4hCandle().recentUnixTime
-        );
-      }
-      return alert;
+      // Development lines
+      // sendNotification({
+      //   title: `RSI -30: ${alert.symbol1}/${alert.symbol2}`,
+      //   body: "The parameter didn't match",
+      // });
+      await AsyncStorage.changeCryptoAlertStatus(false, 0, alert.symbol1);
     }
+    pointer++;
+
+    if (pointer == 5) {
+      await AsyncStorage.resetPointer();
+      await AsyncStorage.setHourPointer(
+        time.getUnixTimeOfLast4hCandle().recentUnixTime
+      );
+    } else await AsyncStorage.setPointer(pointer);
+    return alert;
   } else {
     return { candleChecked: true };
   }

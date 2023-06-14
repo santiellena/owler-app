@@ -7,15 +7,15 @@ const OnAlertNav = ({ setActive, active }) => {
   return (
     <View style={styles.container}>
       <CustomButton
+        title="All"
+        style={!active ? styles.overview : styles.list}
+        onPress={() => setActive(false)}
+      />
+      <CustomButton
         title="On Alert"
         style={active ? styles.overview : styles.list}
         color={theme.colors.mainButton}
         onPress={() => setActive(true)}
-      />
-      <CustomButton
-        title="All"
-        style={!active ? styles.overview : styles.list}
-        onPress={() => setActive(false)}
       />
     </View>
   );

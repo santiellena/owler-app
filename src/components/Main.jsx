@@ -11,6 +11,7 @@ const Main = () => {
   useEffect(() => {
     const firstTime = async () => {
       const first = await AsyncStorage.getInitialData();
+
       if (first == null) {
         await AsyncStorage.storeInitialData();
       }

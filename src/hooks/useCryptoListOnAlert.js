@@ -30,7 +30,6 @@ const useCryptoListOnAlert = (id) => {
     const json = await response.json();
 
     const pivot = [];
-
     for (const crypto of selectedAlert.cryptoList) {
       const activeCrypto = json.find((e) => e.id == crypto[0] && crypto[2]);
       if (activeCrypto) {

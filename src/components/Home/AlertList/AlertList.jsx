@@ -31,6 +31,7 @@ const AlertList = () => {
             period={item.period}
             active={item.active}
             id={item.id}
+            cryptoList={item.cryptoList}
           />
         )}
       />

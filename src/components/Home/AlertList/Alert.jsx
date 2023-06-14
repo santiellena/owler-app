@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   TouchableOpacity,
   Text,
@@ -11,8 +11,29 @@ import { useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import StyledText from "../../Custom/StyledText";
 
-const Alert = ({ description, period, active, id }) => {
+const getAmountCryptoActive = (cryptoList) => {
+  let counter = 0;
+  for (const crypto of cryptoList) {
+    if (crypto[2] == true) {
+      counter++;
+    }
+  }
+  return counter;
+};
+
+const getWidthCryptoActive = (cryptoList) => {
+  const amountCryptoActive = getAmountCryptoActive(cryptoList);
+  return parseInt((amountCryptoActive * 100) / cryptoList.length);
+};
+
+const Alert = ({ description, period, active, id, cryptoList }) => {
   const navigation = useNavigation();
+  const [amountCryptoActive, setAmountCryptoActive] = useState(
+    getAmountCryptoActive(cryptoList)
+  );
+  const [widthCryptoActive, setWidthCryptoActive] = useState(
+    getWidthCryptoActive(cryptoList)
+  );
   let containerStyle = [];
   if (!active) {
     containerStyle.push(styles.container);
@@ -58,12 +79,17 @@ const Alert = ({ description, period, active, id }) => {
           <Animated.View
             style={
               ([StyleSheet.absoluteFill],
-              { backgroundColor: theme.colors.icon, width: "30%" })
+              {
+                backgroundColor: theme.colors.icon,
+                width: `${widthCryptoActive}%`,
+              })
             }
           />
         </View>
         <View style={styles.progressData}>
-          <Text style={styles.progressText}>3/10</Text>
+          <Text
+            style={styles.progressText}
+          >{`${amountCryptoActive}/${cryptoList.length}`}</Text>
         </View>
       </View>
     </TouchableOpacity>

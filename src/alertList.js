@@ -5,11 +5,11 @@ const alertList = [
     period: 14,
     cryptoList: [
       //First boolean for active alert, second boolean for following
-      ["bitcoin", "BTC", true, true],
-      ["ethereum", "ETH", true, true],
-      ["litecoin", "LTC", true, true],
-      ["monero", "XMR", true, true],
-      ["ripple", "XRP", true, true],
+      ["bitcoin", "BTC", false, true],
+      ["ethereum", "ETH", false, true],
+      ["litecoin", "LTC", false, true],
+      ["monero", "XMR", false, true],
+      ["ripple", "XRP", false, true],
     ],
     active: true,
   },

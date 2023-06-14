@@ -23,7 +23,7 @@ const register = () => {
   return BackgroundFetch.registerTaskAsync(RSI30_TASK, {
     //minimumInterval: 14400, // 4 hours interval
     minimumInterval: 25,
-    stopOnTerminate: false,
+    stopOnTerminate: true,
     startOnBoot: false,
   });
 };

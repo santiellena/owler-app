@@ -38,7 +38,7 @@ const OnAlert = ({ route }) => {
   const { cryptoListOnAlert, cryptoListOnActiveAlert } =
     useCryptoListOnAlert(id);
   const navigation = useNavigation();
-  const [active, setActive] = useState(true);
+  const [active, setActive] = useState(false);
 
   return (
     <View
