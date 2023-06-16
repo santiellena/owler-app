@@ -6,9 +6,7 @@ const RSI30_TASK = "RSI30_TASK";
 
 TaskManager.defineTask(RSI30_TASK, async () => {
   try {
-    console.log("PROCESS STARTED");
-
-    const receivedNewData = await notify(); // do your background fetch here
+    const receivedNewData = await notify();
 
     return receivedNewData
       ? BackgroundFetch.BackgroundFetchResult.NewData
@@ -21,7 +19,6 @@ TaskManager.defineTask(RSI30_TASK, async () => {
 
 const register = () => {
   return BackgroundFetch.registerTaskAsync(RSI30_TASK, {
-    //minimumInterval: 14400, // 4 hours interval
     minimumInterval: 25,
     stopOnTerminate: true,
     startOnBoot: false,

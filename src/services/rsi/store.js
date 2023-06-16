@@ -1,4 +1,3 @@
-// Queries to API
 import config from "../../network/config";
 const { taapiSecret, taapiUrl } = config;
 

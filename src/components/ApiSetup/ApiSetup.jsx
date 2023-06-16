@@ -8,7 +8,7 @@ import {
   ActivityIndicator,
   TextInput,
 } from "react-native";
-// import { TextInput } from "react-native-paper";
+
 import theme from "../../theme";
 import StyledText from "../Custom/StyledText";
 let ScreenHeight = Dimensions.get("window").height;
@@ -43,7 +43,6 @@ const ApiSetup = ({ route }) => {
       })
       .catch((error) => {
         setError(true);
-        console.log(error);
         setLoading(false);
       });
   };
@@ -106,7 +105,6 @@ const ApiSetup = ({ route }) => {
 
 const styles = StyleSheet.create({
   container: {
-    // marginTop: Constants.statusBarHeight,
     backgroundColor: theme.colors.background,
     height: ScreenHeight,
     flexDirection: "column",

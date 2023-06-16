@@ -1,7 +1,5 @@
-// Answers to requests received from network, using store functionality
 import store from "./store.js";
 import time from "../../utils/time.js";
-import fakeStore from "./fake.store.js";
 
 const joinData = async ({ symbol1, symbol2, exchange, interval, period }) => {
   const { unixTime18Candles4hAgo: startTime, recentUnixTime: endTime } =
@@ -74,12 +72,10 @@ const AllRsiUnder30 = async ({
   period,
   callback,
 }) => {
-  // symbols:[['BTC', 'USDT'], ['ETH', 'USDT'], ['LTC', 'USDT'], ['XRP', 'USDT'], ['XMR', 'USDT']]
   const results = [];
   let counter = 0;
   const searchInterval = setInterval(async () => {
     if (counter == symbols.length) {
-      console.log("TASK HAS FINISHED");
       clearInterval(searchInterval);
       callback(results);
     } else {

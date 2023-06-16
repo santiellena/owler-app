@@ -4,7 +4,6 @@ const alertList = [
     description: "RSI Min. 30",
     period: 14,
     cryptoList: [
-      //First boolean for active alert, second boolean for following
       ["bitcoin", "BTC", false, true],
       ["ethereum", "ETH", false, true],
       ["litecoin", "LTC", false, true],

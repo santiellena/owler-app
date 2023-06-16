@@ -1,8 +1,6 @@
-// const cero = Date.UTC(2023, 5, 3, 0, 0, 0); Returns date in unix time format
-
 const getUnixTimeOfLast4hCandle = () => {
   const date = new Date();
-  // const minute = date.getUTCMinutes();
+
   const hour = date.getUTCHours();
   const day = date.getUTCDate();
   const month = date.getUTCMonth();

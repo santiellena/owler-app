@@ -7,7 +7,6 @@ const watch = (watching) => {
   if (watching) {
     Rsi30Task.unregister()
       .then(async () => {
-        console.log("Task unregistered");
         await AsyncStorage.changeWatchingStatus(false);
         await AsyncStorage.resetPointer();
         Notification.scheduleNotificationAsync({
@@ -27,7 +26,6 @@ const watch = (watching) => {
   } else if (!watching) {
     Rsi30Task.register()
       .then(async () => {
-        console.log("Task registered");
         await AsyncStorage.changeWatchingStatus(true);
         Notification.scheduleNotificationAsync({
           content: {

@@ -4,7 +4,6 @@ import theme from "../theme";
 
 const styles = StyleSheet.create({
   text: {
-    //fontFamily: "inter",
     color: theme.colors.textPrimary,
   },
   bold: {
