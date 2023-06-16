@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   StyleSheet,
@@ -14,34 +14,46 @@ import StyledText from "../Custom/StyledText";
 let ScreenHeight = Dimensions.get("window").height;
 import config from "../../network/config";
 import AsyncStorage from "../../AsyncStorage";
+import { useNavigation } from "@react-navigation/native";
+import useSecret from "../../hooks/useSecret";
 
-const checkSecret = (secret, setLoading, setError) => {
-  globalThis
-    .fetch(
-      `${config.taapiUrl}/rsi?secret=${secret}&exchange=binance&symbol=BTC/USDT&interval=4h`
-    )
-    .then(async (response) => {
-      if (response.status == 200) {
-        setError(false);
-        await AsyncStorage.setApiSecret(secret);
-        await AsyncStorage.setWelcome(true);
-      } else if (response.status == 401) {
-        setError(true);
-      }
-
-      setLoading(false);
-    })
-    .catch((error) => {
-      setError(true);
-      console.log(error);
-      setLoading(false);
-    });
-};
-
-const ApiSetup = ({}) => {
-  const [secret, setSecret] = useState("");
+const ApiSetup = ({ route }) => {
+  const [secretValue, setSecret] = useState("");
   const [isLoading, setLoading] = useState(false);
   const [isError, setError] = useState(false);
+  const navigation = useNavigation();
+  const { secret } = useSecret();
+
+  const checkSecret = (secretValue, setLoading, setError) => {
+    globalThis
+      .fetch(
+        `${config.taapiUrl}/rsi?secret=${secretValue}&exchange=binance&symbol=BTC/USDT&interval=4h`
+      )
+      .then(async (response) => {
+        if (response.status == 200) {
+          setError(false);
+          await AsyncStorage.setApiSecret(secretValue);
+          await AsyncStorage.setWelcome(false);
+          navigation.navigate("HomeScreen", { welcome: false });
+        } else if (response.status == 401) {
+          setError(true);
+        }
+
+        setLoading(false);
+      })
+      .catch((error) => {
+        setError(true);
+        console.log(error);
+        setLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    if (secret != null) {
+      navigation.navigate("HomeScreen", { welcome: false });
+    }
+  }, []);
+
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
@@ -69,7 +81,7 @@ const ApiSetup = ({}) => {
           secureTextEntry={true}
           onSubmitEditing={() => {
             setLoading(true);
-            checkSecret(secret, setLoading, setError);
+            checkSecret(secretValue, setLoading, setError);
           }}
           error={isError}
           activeUnderlineColor={theme.colors.mainButton}
@@ -79,7 +91,7 @@ const ApiSetup = ({}) => {
         style={styles.add}
         onPress={() => {
           setLoading(true);
-          checkSecret(secret, setLoading, setError);
+          checkSecret(secretValue, setLoading, setError);
         }}
       >
         {isLoading && !isError ? (

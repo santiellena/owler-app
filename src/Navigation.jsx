@@ -5,12 +5,14 @@ import { FontAwesome } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { StyleSheet, View } from "react-native";
+import useSecret from "./hooks/useSecret";
 
 import Notifications from "./Notifications";
 
 //Screens
 import Home from "./components/Home/Home";
 import CryptoList from "./components/CryptoList/CryptoList";
+import ApiSetup from "./components/ApiSetup/ApiSetup";
 import theme from "./theme";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import OnAlert from "./components/Home/OnAlert/OnAlert";
@@ -21,6 +23,7 @@ import AsyncStorage from "./AsyncStorage";
 
 const ListStackNavigator = createNativeStackNavigator();
 const HomeStackNavigator = createNativeStackNavigator();
+const MainStackNavigator = createNativeStackNavigator();
 
 function ListStack() {
   return (
@@ -173,6 +176,26 @@ function MyTabs() {
   );
 }
 
+function MainStack() {
+  const { secret } = useSecret();
+  return (
+    <MainStackNavigator.Navigator>
+      <MainStackNavigator.Group>
+        <MainStackNavigator.Screen
+          name="Tabs"
+          component={MyTabs}
+          options={{ headerShown: false }}
+        />
+        <MainStackNavigator.Screen
+          name="ApiSetup"
+          component={ApiSetup}
+          options={{ headerShown: false }}
+        />
+      </MainStackNavigator.Group>
+    </MainStackNavigator.Navigator>
+  );
+}
+
 const styles = StyleSheet.create({
   record: {
     height: 50,
@@ -221,7 +244,7 @@ function Navigation() {
     <NavigationContainer
       theme={{ colors: { background: theme.colors.background } }}
     >
-      <MyTabs />
+      <MainStack />
     </NavigationContainer>
   );
 }

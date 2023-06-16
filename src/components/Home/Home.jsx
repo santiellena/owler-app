@@ -7,17 +7,30 @@ import StyledText from "../Custom/StyledText";
 import { Modal } from "../Custom/Modal";
 import AsyncStorage from "../../AsyncStorage";
 import theme from "../../theme";
+import fetchSecret from "../../hooks/fetchSecret";
+import { useNavigation } from "@react-navigation/native";
 
-const Home = () => {
+const Home = ({ route }) => {
   const [isModalVisible, setIsModalVisible] = React.useState(false);
-
+  const navigation = useNavigation();
   const fetchWelcome = async () => {
     const welcomeValue = await AsyncStorage.getWelcome();
     setIsModalVisible(!welcomeValue);
   };
+  if (route.params) {
+    if (route.params.welcome == false) {
+      fetchWelcome();
+    }
+  }
 
   useEffect(() => {
-    fetchWelcome();
+    fetchSecret().then((secret) => {
+      if (!secret) {
+        navigation.navigate("ApiSetup", { homeKey: route.key });
+      } else {
+        fetchWelcome();
+      }
+    });
   }, []);
 
   return (

@@ -5,8 +5,6 @@ import theme from "./src/theme";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import * as Notification from "expo-notifications";
-import useSecret from "./src/hooks/useSecret";
-import ApiSetup from "./src/components/ApiSetup/ApiSetup";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -21,8 +19,6 @@ Notification.setNotificationHandler({
 });
 
 export default function App() {
-  const { secret } = useSecret();
-
   const [fontsLoaded] = useFonts({
     "Inter-Black": require("./assets/fonts/Inter-Black.ttf"),
     "Inter-Regular": require("./assets/fonts/Inter-Regular.ttf"),
@@ -49,7 +45,7 @@ export default function App() {
         backgroundColor={theme.colors.background}
         barStyle="light-content"
       />
-      {secret == null ? <ApiSetup /> : <Main />}
+      <Main />
     </View>
   );
 }
