@@ -12,11 +12,13 @@ import { useNavigation } from "@react-navigation/native";
 
 const Home = ({ route }) => {
   const [isModalVisible, setIsModalVisible] = React.useState(false);
+
   const navigation = useNavigation();
   const fetchWelcome = async () => {
     const welcomeValue = await AsyncStorage.getWelcome();
     setIsModalVisible(!welcomeValue);
   };
+
   if (route.params) {
     if (route.params.welcome == false) {
       fetchWelcome();

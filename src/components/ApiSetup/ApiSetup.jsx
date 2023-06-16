@@ -34,6 +34,7 @@ const ApiSetup = ({ route }) => {
           setError(false);
           await AsyncStorage.setApiSecret(secretValue);
           await AsyncStorage.setWelcome(false);
+
           navigation.navigate("HomeScreen", { welcome: false });
         } else if (response.status == 401) {
           setError(true);

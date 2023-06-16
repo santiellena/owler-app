@@ -15,7 +15,7 @@ const Main = () => {
       if (watching == 1) {
         Rsi30Task.unregister();
         const tasks = await TaskManager.getRegisteredTasksAsync();
-        console.log(tasks);
+
         if (!tasks[0]) {
           console.log("Register from inactivity");
           Rsi30Task.register();
@@ -35,8 +35,8 @@ const Main = () => {
       // await AsyncStorage.removeValue("API_SECRET_KEY");
       // await AsyncStorage.removeValue("WELCOME_KEY");
     };
-    checkTaskInactive().catch((e) => console.log(e));
     firstTime().catch((e) => console.log(e));
+    checkTaskInactive().catch((e) => console.log(e));
   }, []);
   return (
     <View style={mainStyle.container}>

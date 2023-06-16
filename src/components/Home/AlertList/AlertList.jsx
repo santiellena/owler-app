@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   FlatList,
   StyleSheet,
@@ -11,9 +11,11 @@ import StyledText from "../../Custom/StyledText";
 import theme from "../../../theme";
 import { useNavigation } from "@react-navigation/native";
 import useAlertList from "../../../hooks/useAlertList";
+import AlertListObj from "../../../alertList";
 
 const AlertList = () => {
   const { alertList } = useAlertList();
+
   const navigator = useNavigation();
   return (
     <View>
@@ -21,7 +23,7 @@ const AlertList = () => {
         Alerts
       </StyledText>
       <FlatList
-        data={alertList}
+        data={alertList ? alertList : AlertListObj}
         style={styles.container}
         numColumns={2}
         keyExtractor={(item, index) => index.toString()}

@@ -177,7 +177,6 @@ function MyTabs() {
 }
 
 function MainStack() {
-  const { secret } = useSecret();
   return (
     <MainStackNavigator.Navigator>
       <MainStackNavigator.Group>
