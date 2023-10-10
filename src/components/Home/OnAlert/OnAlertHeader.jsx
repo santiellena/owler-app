@@ -54,7 +54,7 @@ const OnAlertHeader = ({ title }) => {
 
           <Image
             style={styles.image}
-            source={require("../../../../assets/images/buho3.jpg")}
+            source={require("../../../../assets/images/buho3.png")}
           />
         </View>
       </View>

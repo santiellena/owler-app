@@ -17,7 +17,7 @@ const HomeHeader = () => {
         <View style={styles.buttonContainer}>
           <Image
             style={styles.image}
-            source={require("../../../assets/images/buho3.jpg")}
+            source={require("../../../assets/images/buho3.png")}
           />
         </View>
       </View>
@@ -48,7 +48,6 @@ const styles = StyleSheet.create({
   image: {
     height: 40,
     width: 40,
-    backgroundColor: theme.colors.shadowText,
     borderRadius: 20,
     marginLeft: 15,
   },

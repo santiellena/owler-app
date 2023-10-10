@@ -9,6 +9,7 @@ const sendNotification = ({ title, body }) => {
       color: theme.colors.mainButton,
       autoDismiss: true,
       priority: true,
+      sound: true,
     },
     trigger: {
       seconds: 1,

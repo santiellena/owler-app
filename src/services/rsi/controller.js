@@ -1,7 +1,6 @@
 // Answers to requests received from network, using store functionality
 import store from "./store.js";
 import time from "../../utils/time.js";
-import fakeStore from "./fake.store.js";
 
 const joinData = async ({ symbol1, symbol2, exchange, interval, period }) => {
   const { unixTime18Candles4hAgo: startTime, recentUnixTime: endTime } =

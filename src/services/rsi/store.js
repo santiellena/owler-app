@@ -1,8 +1,10 @@
 // Queries to API
 import config from "../../network/config";
-const { taapiSecret, taapiUrl } = config;
+const { taapiUrl } = config;
+import AsyncStorage from "../../AsyncStorage";
 
 const getRsi = async ({ symbol1, symbol2, exchange, interval, period }) => {
+  const taapiSecret = await AsyncStorage.getApiSecret();
   const response = await globalThis.fetch(
     `${taapiUrl}/rsi?secret=${taapiSecret}&exchange=${exchange}&symbol=${symbol1}/${symbol2}&interval=${interval}&backtracks=19&period=${period}`
   );
@@ -11,6 +13,7 @@ const getRsi = async ({ symbol1, symbol2, exchange, interval, period }) => {
 };
 
 const getMarketValues = async ({ symbol, interval, startTime, endTime }) => {
+  const taapiSecret = await AsyncStorage.getApiSecret();
   const response = await globalThis.fetch(
     `https://data-api.binance.vision/api/v3/klines?symbol=${symbol}&interval=${interval}&startTime=${startTime}&endTime=${endTime}`
   );

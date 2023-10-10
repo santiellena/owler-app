@@ -17,6 +17,7 @@ const watch = (watching) => {
             color: theme.colors.mainButton,
             autoDismiss: true,
             priority: true,
+            sound: true,
           },
           trigger: {
             seconds: 1,
@@ -36,6 +37,7 @@ const watch = (watching) => {
             color: theme.colors.mainButton,
             autoDismiss: true,
             priority: true,
+            sound: true,
           },
           trigger: {
             seconds: 1,
